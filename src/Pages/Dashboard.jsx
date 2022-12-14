@@ -19,6 +19,9 @@ export default function Dashboard() {
             float: 'left',
             margin: '10px'
           }} >+ Add Place</Link>
+          &nbsp;
+          &nbsp;
+          <h1>Your Added Shop </h1>
         </div>
         <div className="AddedShop_con">
           <p>you are not add your place to giving rent yet ,

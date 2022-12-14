@@ -3,7 +3,7 @@
 import "./Static/Common.css"
 export default function Footer() {
   return (
-    <div style={{ width: "100%", backgroundColor: "#333333"}}>
+    <div style={{ width: "100%", backgroundColor: "rgb(56 90 100)"}}>
       <footer className="container py-4" >
         <div className="row">
 

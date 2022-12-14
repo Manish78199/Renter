@@ -1,18 +1,27 @@
 .navbar{
-        width: 100%;
+              width: 100%;
     height: 70px;
-    background-color: #ffff31;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
+    box-shadow: 0 0 4px grey;
     align-items: center;
 
 }
 .Nav_cus{
-  padding-left: 20px;
-  display: flex;
-  width: 100%;
-  column-gap: 100px;
+    padding-right: 20px;
+    padding-left: 20px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
 }
+.nav_search_form{
+  background-color: white;
+  display: flex;
+}
+
+
 .Search_Location_con{
     border: 1px solid rgb(168, 178, 190);
     display: flex;
@@ -21,15 +30,64 @@
    
 }
 #Search_Location_input{
+    font-size: 18px;
+    outline: none;
+    padding-left: 10px;
+    border: none;
     width: 550px;
-   
-   
-    
+    height: 45px;
+    border: 2px solid rgb(0, 0, 0);
+    border-right: none;
 }
+/* #Search_Location_input:focus-visible{
+      border: 3px solid #2a67ff;
+      border-right: none;
+} */
+
 .Search_Location_con > * {
     border: none;
     height: 30px;
 }
+.suggestCon {
+    width: 550px;
+    text-align: left;
+    list-style: none;
+    font-size: 19px;
+    margin-top: 10px;
+    
+    box-shadow: rgb(145, 145, 145) 1px 1px 6px;
+    z-index: 10;
+    position: fixed;
+    background-color: white;
+    padding: 0px;
+}
+
+.suggestCon >li{
+  padding: 0 10px;
+  cursor: pointer;
+}
+.suggestCon >li:hover{
+  background-color: #cacaca;
+}
+
+
+.search_btn{
+  outline: none;
+     padding: 0px;
+    border: none;
+    height: 45px;
+    width: 40px;
+    background-color: rgb(0, 0, 0);
+    background-repeat: no-repeat;
+  
+    background-position: center;
+    background-size: 25px 25px;
+  background-image: url(img/search.svg);
+
+}
+/* .search_btn:hover{
+   background-color: #393d46;
+} */
 
 .activeAppearance{
   display: block!important;

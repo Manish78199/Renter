@@ -15,14 +15,14 @@ export default function Testimonial() {
     }
     return (
         <div>
-            <div className="" style={{ width: "100%", height: "500px", backgroundColor: "#f6da0a", display: "flex" }}>
+            <div className="" style={{ width: "100%", height: "500px", backgroundColor: "rgb(56 90 100)", display: "flex" }}>
                 <h1 style={{
-                    color: '#00094a',
+                    color: '#ffffff',
                     fontWeight: 'bold',
                     fontSize: '60px',
                     marginTop: '90px',
                     marginLeft: '50px'
-                }}>How We Help To Our Client ?</h1>
+                }}>What People Say About Us</h1>
             </div>
             <div className="" style={{
                 display: 'flex',

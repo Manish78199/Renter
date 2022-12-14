@@ -18,7 +18,7 @@ export default function Home() {
    <Navbar/>
    <CoverPage/>
    <Responsible/>
-   <Album/>
+   {/* <Album/> */}
    <Testimonial/>
 
    <Footer/>

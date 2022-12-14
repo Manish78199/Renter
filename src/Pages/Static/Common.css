@@ -160,3 +160,12 @@ border: 2px solid #007eff;
 .footer_table{
     text-align: left;
 }
+
+.card-text{
+    font-size:18px;
+        color: #404040;
+}
+.card:hover{
+    border:none;
+    box-shadow: 0 0 8px #b3b3b3;
+}
