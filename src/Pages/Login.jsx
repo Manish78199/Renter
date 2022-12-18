@@ -3,10 +3,12 @@ import Footer from "./Footer"
 import { Link } from "react-router-dom"
 import { useEffect } from 'react'
 import { useState } from "react"
-export default function Login() {
-
+import { useNavigate } from "react-router-dom"
+export default function Login({search}) {
+  const Navigate=useNavigate()
   useEffect(() => {
-    document.title = " Renter |  Sign in "
+    document.title = " Renter |  Sign in ";
+    search.current.value=""
   })
 
 
@@ -17,7 +19,7 @@ export default function Login() {
 
   function handleForm() {
 
-    fetch('http://localhost:1337/signin/', {
+    fetch('http://localhost:1337/auth/api/signin/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -26,7 +28,13 @@ export default function Login() {
       body: JSON.stringify(user)
     })
       .then(response => response.json())
-      .then(data => console.log("Login successfully"))
+      .then(data => {
+        // console.log(data);
+        localStorage.setItem("token",data.userid);
+        // Navigate("/dashboard")
+      console.log("Login successfully")})
+     .catch(()=>alert("We are facing issue please Retry")) 
+
   }
   /*console.log(JSON.parse(data))*/
 
@@ -49,7 +57,7 @@ export default function Login() {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div style={{
         width: "100%",
         height: "550px",
@@ -89,7 +97,7 @@ export default function Login() {
 
 
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

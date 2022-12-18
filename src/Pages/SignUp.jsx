@@ -68,7 +68,7 @@ export default function SignUpPage() {
 
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <div style={{
                 width: "100%",
                 minHeight: "550px",
@@ -123,7 +123,7 @@ export default function SignUpPage() {
 
 
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

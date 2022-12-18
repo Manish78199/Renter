@@ -97,5 +97,6 @@ height: 550px;
     background-size: contain;
 }
 .place_deatil_con{
+    text-transform: capitalize;
     padding-left: 15px;
 }

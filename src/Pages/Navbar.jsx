@@ -1,13 +1,16 @@
-import React, { useRef, useState  } from 'react'
+import React, { useRef, useState } from 'react'
 import "./Static/Navbar.css"
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 
 
-export default function Navbar() {
-    const suggestText=useRef()
-    let Navigate=useNavigate();
+export default function Navbar({ search ,SUBMIT }) {
+    search.onChange = () => {
+        console.log(search)
+    }
+    // const suggestText=useRef()
+    let Navigate = useNavigate();
     const [appearance, setAppearance] = useState(" ");
     const [Suggest, setSuggest] = useState([]);
     function onfocusSearch() {
@@ -16,40 +19,58 @@ export default function Navbar() {
             setAppearance(" ")
             setSuggest([])
             // document.getElementById("Search_Location_input").blur()
-             suggestText.current.blur();
+            //  suggestText.current.blur();
+            search.current.blur();
         }
     }
-    function searchSuggest(e) {
+   async  function searchSuggest(e) {
         e.preventDefault()
         // setAppearance(e.target.value)
-        
+
         if (e.target.value.trim().length > 0) {
 
-
-            fetch('http://localhost:1337/find/', {
+            try {
+                 let response=await fetch('http://localhost:1337/find/', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ query: e.target.value.trim() })
-            })
-                .then(response => response.json())
-                .then(data => { setSuggest(JSON.parse(data).result); })
+             })
+            let resdata=await response.json()
+                console.log(resdata)
+                if(resdata.result.length>0){
+                    setSuggest(resdata.result)
+
+                }else{
+                    setSuggest(["No Suggestion For You Query"])
+                }
+                
+                
+            } catch(err){
+                    console.log("There is some error")
+                     setSuggest(["There is Some Error"])
+                }
+          
+                
         }
         else {
             setSuggest([])
         }
     }
 
-    const setSuggestFill=(val)=>{
-        suggestText.current.value=val;
-        
-        suggestText.current.blur();
+    const setSuggestFill = (val) => {
+        // suggestText.current.value=val;
+        search.current.value = val;
+        // suggestText.current.blur();
+        search.current.blur()
     }
- function searchSubmit(e){
-  e.preventDefault()
-Navigate("/find")
+    function searchSubmit(e) {
+        e.preventDefault()
+         console.log("submit from navbar")
+        Navigate("/find")
+       
     }
 
 
@@ -58,17 +79,17 @@ Navigate("/find")
         <nav className="navbar ">
 
             <div className=" Nav_cus" >
-                <Link to="/" style={{ textDecoration: "none", color:"black"}}><h3 > Renter.Com</h3></Link>
+                <Link to="/" style={{ textDecoration: "none", color: "black" }}><h3 > Renter.Com</h3></Link>
 
 
-                <form className=" nav_search_form" role="search" onSubmit={searchSubmit} >
+                <form className=" nav_search_form" role="search" onSubmit={searchSubmit} ref={SUBMIT} >
                     <div>
-                        <input className="" id='Search_Location_input' ref={suggestText} type="search"  placeholder="1200 Sf in kanker khera etc. " aria-label="Search" onChange={searchSuggest} onFocus={onfocusSearch} onBlur={() => { setAppearance(" "); setSuggest([]) }} />
+                        <input className="" id='Search_Location_input' ref={search} type="search" placeholder="1200 Sf in kanker khera etc. " aria-label="Search" onChange={searchSuggest} onFocus={onfocusSearch} onBlur={() => { setAppearance(" "); setSuggest([]) }} />
                         <ul className="suggestCon" >
                             {
 
-                                Suggest.map((data,ind) => {
-                                    return (<li data-suggest={data}  key={ind} style={{ padding: '0px 10px' }} onMouseDown={()=>setSuggestFill(data)}>{data}</li>)
+                                Suggest.map((data, ind) => {
+                                    return (<li data-suggest={data} key={ind} style={{ padding: '0px 10px' }} onMouseDown={() => setSuggestFill(data)}>{data}</li>)
                                 })
                                 //    Suggest.map((data)=>{
                                 //     return (
@@ -82,16 +103,20 @@ Navigate("/find")
                     <button className="search_btn" type="submit" ></button>
 
                 </form>
-                <div> 
-                    <Link  to="/dashboard" style={{fontSize:"18px",color:"black",padding:"8px 15px"}}>Dashboard</Link>
-                
-                  &nbsp;&nbsp;
-                  &nbsp;&nbsp;
-                <Link  to="/signin" style={{fontSize:"18px",color:"white",backgroundColor:"royalblue",padding:"8px 15px"}}>Login</Link>
-                
+                <div className="help_link">
+                    <Link to="/dashboard" >Dashboard</Link>
+
+                    &nbsp;&nbsp;
+                    &nbsp;&nbsp;
+                    <Link to="/signin" >Login</Link>
+
                 </div>
-                
+
             </div>
+
+            <div className="alert_box" >
+            </div> 
+
             <div className={appearance} style={{
                 top: '70px',
                 zIndex: '9',

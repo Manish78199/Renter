@@ -1,10 +1,25 @@
 import Navbar from "./Navbar"
 import Footer from "./Footer"
+import { Navigate } from "react-router-dom"
 import "./Static/form.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import img1 from "./Static/img/SF1.jpg"
 
-export default function Find() {
+export default function Find({search,SUBMIT}) {
+  
+  SUBMIT.current.onsubmit=function(){
+    console.log("submit from find")
+    console.log(search.current.value)
+    
+  }
+  
+  // useEffect(()=>{
+  //   console.log(searchvalue)
+  // },[searchvalue])
+  // search.current.onchange=function(e){
+  //   console.log(e,this,search.current.value)
+  // }
+   
 
   const [Items, setItems] = useState([
     {
@@ -24,10 +39,10 @@ export default function Find() {
     }
   ])
 
-
+  
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="find_main_con">
 
 
@@ -117,7 +132,7 @@ export default function Find() {
         </div>
 
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

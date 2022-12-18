@@ -100,17 +100,19 @@ export default function Rent() {
 
     return (
         <>
-            <Navbar />
-            <div  style={{ textAlign: 'left',
-fontSize: '18px',
-backgroundColor: '#ededed',
-padding: '10px' }}>
+            {/* <Navbar /> */}
+            <div style={{
+                textAlign: 'left',
+                fontSize: '18px',
+                backgroundColor: '#ededed',
+                padding: '10px'
+            }}>
                 <p><Link to="/">Home</Link> &gt; <Link to="/dashboard">Dashboard</Link> &gt; adding Place here</p>
             </div>
-            <div className="conatiner" style={{backgroundColor: '#ededed',paddingBottom:"20px"}}>
+            <div className="conatiner" style={{ backgroundColor: '#ededed', paddingBottom: "20px" }}>
 
 
-                <div className="container col-md-8 order-md-1 mb-3" style={{ textAlign: "left", padding: "20px",backgroundColor:"white" }}>
+                <div className="container col-md-8 order-md-1 mb-3" style={{ textAlign: "left", padding: "20px", backgroundColor: "white" }}>
                     <h2 className="mt-3" style={{
                         marginBottom: '50px',
                         color: '#010030'
@@ -336,7 +338,7 @@ padding: '10px' }}>
                 </div>
             </div>
 
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }
