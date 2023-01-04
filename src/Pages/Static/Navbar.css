@@ -63,6 +63,7 @@
 }
 
 .suggestCon >li{
+  text-transform: capitalize;
   padding: 0 10px;
   cursor: pointer;
 }

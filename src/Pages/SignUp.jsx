@@ -1,12 +1,12 @@
 import Navbar from "./Navbar"
 import Footer from "./Footer"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { useState } from "react"
 
 
-export default function SignUpPage() {
-
+export default function SignUpPage({Alert}) {
+    let Navigate=useNavigate()
     useEffect(() => {
         document.title = " Renter |  Sign Up "
     })
@@ -19,9 +19,9 @@ export default function SignUpPage() {
         cpassword: ""
     });
 
-    function handleForm() {
+  async  function handleForm() {
 
-        fetch('http://localhost:1337/signup/', {
+       let signupResponse=await fetch('http://localhost:1337/api/signup/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
@@ -29,8 +29,20 @@ export default function SignUpPage() {
             },
             body: JSON.stringify(user)
         })
-            .then(response => response.json())
-            .then(data => console.log(data.description))
+          let signupData = await signupResponse.json()
+          if(signupData.status===200){
+            Alert("Success",signupData.success)
+            Navigate('/signin')
+          }
+          else{
+            if(signupData.message){
+                  Alert("message",signupData.message)
+            }
+            else{
+                Alert("Error",signupData.error)
+            }
+          }
+            
     }
     /*console.log(JSON.parse(data))*/
 

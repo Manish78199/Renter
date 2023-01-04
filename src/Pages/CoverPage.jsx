@@ -1,6 +1,14 @@
 import cimage from "./Static/img/Cover.jpg"
 import "./Static/Navbar.css"
-export default function CoverPage() {
+
+export default function CoverPage({search}) {
+  function getStarted(e){
+   e.preventDefault()
+   window.scrollTo({top:0,behavior:"smooth"})
+   search.current.focus()
+  
+  
+  }
   return (
     <div style={{display:"flex"}}>
       <div className='right_cover' style={{ width: '45%'}}></div>
@@ -11,7 +19,7 @@ export default function CoverPage() {
           <h1 className="cover-heading" >Find Your Place.</h1>
           <p className="lead" >Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
           <p className="lead">
-            <a href="#" className="btn btn-lg btn-primary">Get Started</a>
+            <button className="btn btn-lg btn-primary" onClick={getStarted}>Get Started</button>
           </p>
         </main>
 

@@ -1,6 +1,6 @@
 import Navbar from "./Navbar"
 import Footer from "./Footer"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
 import uploadimage from "./Static/img/upload2.svg"
@@ -8,7 +8,8 @@ import "./Static/form.css"
 
 
 
-export default function Rent() {
+export default function Rent({Alert}) {
+    let Navigate=useNavigate()
     const [showImage, setShowImage] = useState([null])
     const [shopImage, setShopImage] = useState([])
     const [formfeild, setformfeild] = useState({
@@ -28,7 +29,7 @@ export default function Rent() {
     useEffect(() => {
 
 
-
+    
         setShowImage([])
         console.log(shopImage)
         shopImage.forEach((ima) => {
@@ -68,8 +69,8 @@ export default function Rent() {
 
 
     async function uploadshopdata(e) {
-
-
+          e.preventDefault()
+          
         let formd = new FormData()
         console.log(shopImage)
         console.log("show image length", showImage.length)
@@ -78,21 +79,31 @@ export default function Rent() {
             formd.append("placeimage", file)
 
         })
-        console.log(formd)
+     
         let headersList = {
-            "Accept": "*/*"
-
+            "Accept": "*/*",
+            "token":localStorage.getItem('token')
         }
 
 
-        let response = await fetch("http://localhost:1337/postImage", {
+        let response = await fetch("http://localhost:1337/api/auth/addshop", {
             method: "POST",
             body: formd,
             headers: headersList
         });
 
-        let data = await response.text();
-        console.log(data);
+        let data = await response.json();
+       
+        if(data.status === 200){
+            
+          await Alert("Success",data.success)
+            Navigate("/dashboard")
+            
+        }
+        else{
+            Alert("Error",data.error)
+        }
+        
 
 
     }
@@ -117,15 +128,15 @@ export default function Rent() {
                         marginBottom: '50px',
                         color: '#010030'
                     }}>Give Some Information To Add Place For Rent.</h2>
-                    <form className="needs-validation" method="post" noValidate>
+                    <form className="needs-validation" onSubmit={uploadshopdata} noValidate>
 
 
                         <div className="row">
                             <div className="mb-3 w-50">
                                 <label htmlFor="Name">Your Name.  </label>
-                                <input type="text" className="form-control" style={{ width: "350px" }} id="giver_name" placeholder="Manish" name="giver_name" required onInput={handleformfeild} />
+                                <input type="text" className="form-control" style={{ width: "350px" }} id="giver_name" placeholder="Manish" name="giver_name" required onInput={handleformfeild} minLength="3" />
                                 <div className="invalid-feedback">
-                                    Please enter a valid Name for shipping updates.
+                                    Please enter a valid Name .
                                 </div>
                             </div>
 
@@ -144,13 +155,13 @@ export default function Rent() {
                             <div className="mb-3 w-50">
                                 <label htmlFor="number">Contact Number. </label>
                                 <input type="number" className="form-control" id="contact_no" style={{ width: "350px" }} name="contact_no" placeholder="985xxxxx56"
-                                    maxLength="10" required onInput={handleformfeild} />
+                                    maxLength="10" required onInput={handleformfeild} minLength="10"/>
                                 <div className="invalid-feedback">
                                     Please enter a valid email address for shipping updates.
                                 </div>
                             </div>
                             <div className="mb-3 w-50">
-                                <label htmlFor="Whatapp  number">Whatapp Number. </label>
+                                <label htmlFor="Whatapp  number">Whatapp Number (Optional) </label>
                                 <input type="number" className="form-control" id="number" name="whatapp_no" placeholder="86945xxxxx"
                                     maxLength="10" required style={{ width: "350px" }} onInput={handleformfeild} />
                                 <div className="invalid-feedback">
@@ -162,8 +173,8 @@ export default function Rent() {
 
                         <div className="row">
                             <div className="mb-3 w-50">
-                                <label htmlFor="Place_size">Place Size. </label>
-                                <input type="text" className="form-control" id="number" name="place_size" placeholder="1200 sf"
+                                <label htmlFor="Place_size">Place Size ( SFeet ). </label>
+                                <input type="number" className="form-control" id="number" name="place_size" placeholder="1200 sf"
                                     required style={{ width: "350px" }} onInput={handleformfeild} />
                                 <div className="invalid-feedback">
                                     Please enter a valid Place size.
@@ -173,7 +184,7 @@ export default function Rent() {
                             <div className="mb-3 w-50">
                                 <label htmlFor="Rent Amount">Rent Amount/Month. </label>
                                 <input type="number" className="form-control" id="number" name="price_pm" placeholder="5000 INR"
-                                    maxLength="10" required style={{ width: "350px" }} onInput={handleformfeild} />
+                                     required style={{ width: "350px" }} onInput={handleformfeild} />
                                 <div className="invalid-feedback">
                                     Please enter a valid email address for shipping updates.
                                 </div>
@@ -331,7 +342,7 @@ export default function Rent() {
                             </div>
                         </div>
 
-                        <div><button type="button" className="btn btn-primary btn-lg" onClick={uploadshopdata} >Submit</button></div>
+                        <div><button type="submit" className="btn btn-primary btn-lg"  >Submit</button></div>
                     </form>
 
 

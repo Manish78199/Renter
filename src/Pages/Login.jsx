@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { useEffect } from 'react'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-export default function Login({search}) {
+export default function Login({search,Alert,Auth}) {
   const Navigate=useNavigate()
   useEffect(() => {
     document.title = " Renter |  Sign in ";
@@ -17,23 +17,31 @@ export default function Login({search}) {
     password: ""
   });
 
-  function handleForm() {
+ async function handleForm() {
 
-    fetch('http://localhost:1337/auth/api/signin/', {
+   let signinResponse= await fetch('http://localhost:1337/api/auth/signin/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json, text/plain, */*',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)
-    })
-      .then(response => response.json())
-      .then(data => {
-        // console.log(data);
-        localStorage.setItem("token",data.userid);
-        // Navigate("/dashboard")
-      console.log("Login successfully")})
-     .catch(()=>alert("We are facing issue please Retry")) 
+    });
+     let signinData= await signinResponse.json()
+     if(signinData.status===200){
+       localStorage.setItem("token",signinData.userid);
+       Alert("Success",signinData.succes)
+       Auth(true)
+       Navigate("/dashboard")
+     }
+     else{
+      Alert("Error",signinData.error)
+     }
+    
+       
+    
+      
+   
 
   }
   /*console.log(JSON.parse(data))*/

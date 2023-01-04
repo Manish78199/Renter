@@ -7,7 +7,7 @@ import {
   Routes,
   Route,
   Navigate
- 
+
 
 } from "react-router-dom";
 import Login from './Pages/Login';
@@ -17,50 +17,74 @@ import Rent from './Pages/Rent';
 import Find from './Pages/Find'
 import Navbar from './Pages/Navbar';
 import Footer from './Pages/Footer';
-import { useRef } from 'react';
+import Messanger from './Pages/Messanger';
+
+
+import { useEffect, useRef, useState } from 'react';
 
 function App() {
-  let isAuthenticate=false;
-  if(localStorage.getItem("token")){
-         isAuthenticate= true;
+  const [isAuthenticate, setIsAuthenticate] = useState(false);
+  useEffect(()=>{
+     if (localStorage.getItem("token")) {
+   
+    setIsAuthenticate(true)
   }
-  
-  let seachedText=useRef();
-  let seachSubmitform=useRef();
+  },[])
+ 
+
+  let seachedText = useRef();
+  let seachSubmitform = useRef();
+  let alertb = useRef();
+
+
+   function ShowAlert(type, message) {
+    try {
+      alertb.current.style.backgroundColor = type == "Error" ? "#f82828" : type == "Success" ? "#0dd3af" : "#ddcc05"
+      alertb.current.style.display = "block"
+      alertb.current.innerHTML = type + " : " + message;
+       setTimeout( () => {
+        alertb.current.style.display = "none"
+      }, 2000)
+    } catch (error) {
+      alert(message)
+    }
+
+  }
 
   return (
 
     <div className="App">
-      
+
       <BrowserRouter>
-      <Navbar search={seachedText} SUBMIT={seachSubmitform}/>
+        <Navbar search={seachedText} SUBMIT={seachSubmitform} isAuthenticate={isAuthenticate} setIsAuthenticate={setIsAuthenticate}/>
+        <div className="Alert_Box" ref={alertb} ></div>
         <Routes>
-          
-          <Route path="/" element={<Home />} />
-          <Route path="/find" element={<Find  search={seachedText} SUBMIT={seachSubmitform} />} />
+
+          <Route path="/" element={<Home search={seachedText}/>} />
+          <Route path="/find" element={<Find search={seachedText} SUBMIT={seachSubmitform} />} />
 
 
-         <Route path="/signin"   element={isAuthenticate ? <Navigate to="/dashboard" /> : <Login search={seachedText}/>}/>
+          <Route exact path="/signin" element={isAuthenticate ? <Navigate to="/dashboard" /> : <Login search={seachedText} Alert={ShowAlert} Auth={setIsAuthenticate} />} />
           {/* <Route path="/signin">
             {isAuthenticate ? <Dashboard /> : <Login />}
           </Route> */}
 
-          <Route path="/signup" element={<SignUpPage search={seachedText} />} />
-          <Route exact path="/dashboard" element={isAuthenticate ? <Dashboard search={seachedText}/>  : <Navigate to="/signin" />}/>
+          <Route path="/signup" element={<SignUpPage search={seachedText} Alert={ShowAlert} />} />
+          <Route exact path="/dashboard" element={isAuthenticate ? <Dashboard search={seachedText} Alert={ShowAlert} /> : <Navigate to="/signin" />} />
           {/* <Route exact path="/dashboard" >
             {isAuthenticate ? <Dashboard /> : <Login />}
           </Route> */}
 
-          <Route exact path="/dashboard/rent" element={isAuthenticate ? <Rent /> : <Navigate to="/signin" />}/>
-
-          {/* <Route exact path="/dashboard/rent" >
-            {isAuthenticate ? <Rent /> : <Login />}
-          </Route> */}
+          <Route exact path="/dashboard/rent" element={isAuthenticate ? <Rent Alert={ShowAlert}/> : <Navigate to="/signin" />} />
+          
+          <Route exact path="/messanger" element={isAuthenticate ? <Messanger Alert={ShowAlert}/> : <Navigate to="/signin" />} />
+          
+          
 
         </Routes>
-        <Footer/>
+        <Footer />
       </BrowserRouter>
-      
+
     </div>
   );
 }

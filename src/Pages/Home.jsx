@@ -7,21 +7,22 @@ import Responsible from './Responsible'
 import Album from './Album'
 import { useEffect } from 'react'
 
-export default function Home() {
+export default function Home({search}) {
   useEffect(()=>{
     document.title=" Renter |  Home "
+     search.current.value = ""
   })
 
 
   return (
    <>
-   {/* <Navbar/> */}
-   <CoverPage/>
+  
+   <CoverPage search={search}/>
    <Responsible/>
-   {/* <Album/> */}
+ 
    <Testimonial/>
 
-   {/* <Footer/> */}
+  
    
    </> 
    

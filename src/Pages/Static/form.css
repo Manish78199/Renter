@@ -45,13 +45,14 @@ label {
     cursor:pointer;
     padding: 4px 10px;
     width: 200px;
-    border: 2px solid #0043a9;
+    border: 2px solid #2c2c2c;
 }
 .find_custom-select:focus-visible{
     border: none;
-    outline: 3px solid #000102;
+    outline: 3px solid #3e8aff;
 }
 .find_custom-select > option{
+    padding: 2px 0;
     font-size: 17px;
     color: rgb(0, 0, 0);
     background-color: #ffffff;
@@ -86,6 +87,7 @@ height: 550px;
     display: flex;
     border-radius: 4px;
     align-items: center;
+    
     background-color: white;
     box-shadow: 0 0 5px #b5b5b5;
 }
@@ -99,4 +101,187 @@ height: 550px;
 .place_deatil_con{
     text-transform: capitalize;
     padding-left: 15px;
+}
+.modify_place_btn{
+    display: flex;
+    height: 200px;
+    width: 250px;
+    border-left:  2px solid #e5e5e5;
+    float: right;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    border-radius: 4px;
+   
+}
+.modify_place_btn >button{
+    
+    /* color:white; */
+    
+    /* border:none; */
+    background-color: white;
+    font-size: 18px;
+    width: 70%;
+    border-width: 2px;
+    border-style: solid;
+
+}
+.modify_place_btn >button:hover{
+    color: white;
+}
+.modify_place_btn >button:first-child{
+border-color: #f82828;
+}
+.modify_place_btn >button:first-child:hover{
+
+    background-color: #f82828;
+}
+
+
+.modify_place_btn >button:last-child{
+   
+   border-color: #0dd3af;
+    
+}
+.modify_place_btn>button:last-child:hover{
+  
+    background-color: #0dd3af;
+}
+
+
+
+.fade-color{
+        color: #464646;
+}
+
+
+/* show box  */
+
+
+
+
+.showPlaceBox{
+    display: none;
+    height: 664px;
+    position: fixed;
+    width: 100%;
+    z-index: 12;
+    top: 0;
+    left: 0;
+   background-color: white;
+}
+
+
+.showPlaceBox-Nav{
+    height: 70px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding-left: 30px;
+     background-color:beige ; 
+}
+.showPlaceBox-Nav >button{
+        font-size: 30px;
+    font-weight: bold;
+    border: 0px;
+    background: none;
+}
+.showPlaceBox-Nav >button:hover{
+    border:2px solid blue;
+}
+
+
+
+.placeImage-Con{
+    margin-top: 10px;
+    width: max-content;
+    height: 400px;
+    display: flex;
+      padding-left: 5px;
+    column-gap: 10px;
+}
+.placeImage-Navbar{
+       
+    padding: 8px 0px;
+    width: 80px;
+  
+    height: inherit;
+    overflow-x: hidden;
+     background-color: #fbfbfb;
+    overflow-y: auto;
+    padding-left: 5px;
+}
+
+.placeImage-Navbar::-webkit-scrollbar{
+    cursor: pointer;
+    width: 4px;
+    padding-right: 3px;
+    background-color: #ececec; 
+   
+}
+
+.placeImage-Navbar::-webkit-scrollbar-thumb{
+    
+    background-color: #00f7ff;
+}
+.placeImage-Navbar::-webkit-scrollbar-corner{
+    width: 5px;
+}
+.placeImage-Navbar::-webkit-scrollbar-button{
+
+height: 12px ;
+background-color:  rgb(0, 128, 255);
+}
+
+
+.placeImage-Navbar >.placeImage{
+    cursor: pointer;
+    background-color: white;
+    margin-top: 5px;
+    width: 60px;
+    border-radius: 2px;
+    height: 60px;
+    border: 1px solid rgb(206, 206, 206);
+    background-position: center;
+    background-repeat:no-repeat;
+    background-size: contain;
+}
+.placeImage-Navbar >.placeImage:hover{
+    border:2px solid rgb(4, 0, 255);
+}
+.placeImage-Navbar >.placeImage.active{
+    border:2px solid
+}
+
+
+
+.placeImage-Box{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  width: 460px;  
+  background-color: #fbfbfb;
+  height: inherit;
+  
+}
+
+.placeDetailsCon{
+    text-transform: capitalize;
+    text-align: left;
+    padding: 20px;
+}
+.hide{
+    display: none!important;
+}
+.show{
+     display: block!important;
+}
+
+.showplacebox-target{
+color:#000d3e;
+}
+
+.showplacebox-target:hover{
+color:#022eca;
 }

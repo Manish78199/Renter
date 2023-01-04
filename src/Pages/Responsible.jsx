@@ -13,7 +13,7 @@ export default function Responsible() {
             <main className="pb-3 pt-3" role="main" style={{backgroundColor: '#e7e7e7'}}>
 
 
-                <div className="jumbotron py-4" style={{ backgroundColor: "whitesmoke" }}>
+                <div className="jumbotron py-4" style={{ backgroundColor: "white" }}>
                     <div className="container" style={{ textAlign: "left" }}>
                         <h1 className="display-3">Why we Here ?</h1>
                         <p style={{fontSize:"18px"}}>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
